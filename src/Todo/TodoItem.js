@@ -34,7 +34,6 @@ function TodoItem({ todo, onCompleted }) {
         <button
           className="todo-item__control"
           onClick={() => {
-            console.log(todo.id, 'ID');
             removeTodo(todo.id);
           }}
         >
