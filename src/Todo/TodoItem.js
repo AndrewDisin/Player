@@ -1,18 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import Context from '../context';
 
-function TodoItem(props) {
+function checkClasses(isCompleted) {
+  let newClasses = [];
+  if (isCompleted) {
+    newClasses.push('done');
+  }
+  return newClasses;
+}
+
+function TodoItem({ todo, onCompleted }) {
+  const { removeTodo } = useContext(Context);
   return (
-    <li className="todo__list-item todo-item">
+    <li
+      className={`todo__list-item todo-item ${checkClasses(todo.completed).join(
+        ''
+      )}`}
+    >
       <label className="todo-item__content">
-        <input className="todo-item__filter" type="checkbox" />
-        <div className="todo-item__info">
-          <span>{props.id}</span>
-          <span>{props.title}</span>
+        <input
+          className="todo-item__filter"
+          type="checkbox"
+          checked={todo.completed}
+          onChange={() => onCompleted(todo.id)}
+        />
+        <div className={'todo-item__info'}>
+          <span>{todo.id}</span>
+          <span>{todo.title}</span>
         </div>
       </label>
       <div className="todo-item__controls">
-        <button className="todo-item__control">
+        <button
+          className="todo-item__control"
+          onClick={() => {
+            console.log(todo.id, 'ID');
+            removeTodo(todo.id);
+          }}
+        >
           <svg
             height="311pt"
             viewBox="0 0 311 311.077"
@@ -29,8 +54,8 @@ function TodoItem(props) {
 }
 
 TodoItem.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
+  todo: PropTypes.object,
+  onCompleted: PropTypes.func.isRequired,
 };
 
 export default TodoItem;
