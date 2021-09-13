@@ -1,0 +1,68 @@
+.todo {
+  display: block;
+}
+
+.todo__list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.todo__list-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.todo-item {
+  border: 1px solid rgb(100, 100, 100);
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgb(230, 220, 220);
+}
+
+.todo-item__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  cursor: pointer;
+}
+
+.todo-item__filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.todo-item__info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.todo-item__controls {
+  margin-left: auto;
+}
+
+.todo-item__control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 3px;
+  background: white;
+  cursor: pointer;
+}
