@@ -33,7 +33,8 @@ function TodoItem({ todo, onCompleted }) {
       <div className="todo-item__controls">
         <button
           className="todo-item__control"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             removeTodo(todo.id);
           }}
         >
