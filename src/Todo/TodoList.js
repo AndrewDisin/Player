@@ -4,7 +4,7 @@ import TodoItem from './TodoItem';
 import './todo.css';
 
 function TodoList(props) {
-  return (
+  return props.todos.length > 0 ? (
     <ul className="todo__list">
       {props.todos.map((todo) => {
         return (
@@ -12,6 +12,8 @@ function TodoList(props) {
         );
       })}
     </ul>
+  ) : (
+    <div className="empty-text">Список пуст</div>
   );
 }
 
