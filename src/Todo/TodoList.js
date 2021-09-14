@@ -13,7 +13,7 @@ function TodoList(props) {
       })}
     </ul>
   ) : (
-    <div className="empty-text">Список пуст</div>
+    <div className="empty-text">No todos!</div>
   );
 }
 

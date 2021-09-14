@@ -1,26 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TodoList from './Todo/TodoList';
-import AddTodo from './Todo/AddTodo';
 import Context from './context';
+import Loader from './Loader';
+
+const AddTodo = React.lazy(
+  () =>
+    new Promise((resolve) =>
+      setTimeout(() => {
+        resolve(import('./Todo/AddTodo'));
+      }, 5000)
+    )
+);
 
 function App() {
-  const [todos, setTodos] = React.useState([
-    {
-      id: 1,
-      completed: true,
-      title: 'Купить хлеб',
-    },
-    {
-      id: 2,
-      completed: false,
-      title: 'Купить масло',
-    },
-    {
-      id: 3,
-      completed: false,
-      title: 'Купить молоко',
-    },
-  ]);
+  const [todos, setTodos] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+      .then((response) => response.json())
+      .then((todos) => {
+        setTimeout(() => {
+          setTodos(todos);
+          setLoading(false);
+        }, 2000);
+      });
+  }, []);
 
   function togleTodo(id) {
     setTodos(
@@ -54,9 +59,17 @@ function App() {
     <Context.Provider value={{ removeTodo }}>
       <div className="wrapper todo">
         <h2>Create Todo</h2>
-        <AddTodo onCreate={addTodo} />
-        <h2>Todo List</h2>
-        <TodoList todos={todos} onToggle={togleTodo} />
+        <React.Suspense fallback={<Loader />}>
+          <AddTodo onCreate={addTodo} />
+        </React.Suspense>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <h2>Todo List</h2>
+            <TodoList todos={todos} onToggle={togleTodo} />
+          </>
+        )}
       </div>
     </Context.Provider>
   );

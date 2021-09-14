@@ -31,7 +31,7 @@ function AddTodo({ onCreate }) {
       <input
         className="form-create__input"
         type="text"
-        placeholder="Введите заголовок"
+        placeholder="Todo title"
         {...input.bind}
       />
       <button className="form-create__button" type="submit">
